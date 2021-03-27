@@ -1,0 +1,40 @@
+def clean_array(array):
+    cleaned_array = []
+    for c in array:
+        if c != '?':
+            cleaned_array += [c]
+
+    return cleaned_array
+
+
+def get_cleaned_cost(x, y, array):
+    cost = 0
+    for i in range(len(array)-1):
+        if array[i] == array[i + 1]:
+            cost += 0
+        elif array[i] == 'C' and array[i + 1] == 'J':
+            cost += x
+        elif array[i] == 'J' and array[i + 1] == 'C':
+            cost += y
+
+    return cost
+
+
+def calculate_cost(x: int, y: int, c):
+    if x >= 0 and y >= 0:
+        cleaned_array = clean_array(c)
+        return get_cleaned_cost(x, y, cleaned_array)
+    else:
+        return 0
+
+
+def main():
+    T = int(input())
+    for case in range(1, T + 1):
+        x, y, c = input().split(" ")
+        min_cost = calculate_cost(int(x), int(y), c)
+        print("Case #{}: {}".format(case, min_cost))
+
+
+if __name__ == '__main__':
+    main()
